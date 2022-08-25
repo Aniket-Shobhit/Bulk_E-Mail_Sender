@@ -22,7 +22,7 @@ async function sendMail(receiver, subject, text, htmlTemplate) {
             to: receiver,
             subject: subject,
             text: text,
-            html: html,
+            html: htmlTemplate,
         };
 
         const result = await transport.sendMail(mailOptions);
@@ -33,5 +33,7 @@ async function sendMail(receiver, subject, text, htmlTemplate) {
     }
 }
 
-sendMail().then(result => console.log('Email sent successfully!', result))
-.catch(err => console.log(err.message));
+// sendMail().then(result => console.log('Email sent successfully!', result))
+// .catch(err => console.log(err.message));
+
+module.exports = sendMail;
