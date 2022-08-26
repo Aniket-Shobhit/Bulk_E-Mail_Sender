@@ -1,10 +1,14 @@
-const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config({path:'./config/.env'});
 
-const port = process.env.PORT;
-const app = express();
+const sendMail = require('./src/function/sendMail');
+const loadReceivers = require('./src/function/loadReceivers');
 
-app.listen(port, () => {
-    console.log('Server is up and runnning on port ' + port);
-})
+const send = () => {
+    const data = loadReceivers();
+    const receivers = data.receivers;
+    const subject = data.subject;
+    sendMail(receivers, subject);
+};
+
+send();

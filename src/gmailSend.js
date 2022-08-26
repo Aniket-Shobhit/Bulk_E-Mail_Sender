@@ -1,7 +1,10 @@
 const nodemailer = require('nodemailer');
 const oAuth2Client = require('./gmailApi');
 
-async function sendMail(receiver, subject, text, htmlTemplate) {
+async function gmailSend(receiver, subject, htmlTemplate) { 
+    const CLIENT_ID = process.env.CLIENT_ID;
+    const CLIENT_SECRET = process.env.CLIENT_SECRET;
+    const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
     try {
         const accessToken = await oAuth2Client.getAccessToken()
 
@@ -14,14 +17,16 @@ async function sendMail(receiver, subject, text, htmlTemplate) {
                 clientSecret: CLIENT_SECRET,
                 refreshToken: REFRESH_TOKEN,
                 accessToken: accessToken
-            }
+            },
+            maxMessages: 200,
+            pool: true,
+            secure: true
         }); 
 
         const mailOptions = {
             from: '"Aniket" <shobhitaniket3@gmail.com>',
             to: receiver,
             subject: subject,
-            text: text,
             html: htmlTemplate,
         };
 
@@ -33,7 +38,7 @@ async function sendMail(receiver, subject, text, htmlTemplate) {
     }
 }
 
-// sendMail().then(result => console.log('Email sent successfully!', result))
+// gmailSend().then(result => console.log('Email sent successfully!', result))
 // .catch(err => console.log(err.message));
 
-module.exports = sendMail;
+module.exports = gmailSend;
