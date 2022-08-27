@@ -21,4 +21,4 @@ Sends E-Mail to many people through GMail account that requires 2 factor authent
 * Now authorize the API and exchange the Authorization code for a refresh token.
 * Make a config file saving the username and password of the GMail account from which u want to send the E-Mail and also save the client ID, client secret and refresh token.
 * Now in the receivers.json file edit the subject and the receivers property and edit the demoTemplate located inside the template folder under src to use your own E-Mail Template.
-* Now write ** node app.js ** and you are done.
+* Now write **npm init** to install the required modules and then **node app.js** and you are done.
